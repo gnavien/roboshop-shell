@@ -1,6 +1,6 @@
 #vim /etc/yum.repos.d/mongo.repo
 echo -e "\e[32mCopy mogo DB Repo file\e[0m"
-cp mongdb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
+cp /home/roboshop-shell/Shell/mongdb.repo /etc/yum.repos.d/mongodb.repo &>>/tmp/roboshop.log
 echo -e "\e[32mInstalling MogoDB Server\e[0m"
 yum install mongodb-org -y &>>/tmp/roboshop.log
 

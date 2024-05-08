@@ -13,7 +13,7 @@ mkdir /app
 
 echo -e "\e[32m Download Application content \e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/roboshop.log
-cd /app &>>/tmp/roboshop.log
+cd /app
 
 echo -e "\e[32m Extract application content\e[0m"
 unzip /tmp/catalogue.zip &>>/tmp/roboshop.log
@@ -23,7 +23,7 @@ cd /app
 npm install &>>/tmp/roboshop.log
 
 echo -e "\e[32m Setup systemd services\e[0m"
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp /home/roboshop-shell/Shell/catalogue.service /etc/systemd/system/catalogue.service
 
 echo -e "\e[32m Start Catalogue service \e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
