@@ -16,3 +16,4 @@ mysql_secure_installation --set-root-pass RoboShop@1 &>>/tmp/roboshop.log
 
 #echo -e "\e[32m\e[0m"
 #mysql -uroot -pRoboShop@1 &>>/tmp/roboshop.log
+# netstat -lntp to check the database port is working
