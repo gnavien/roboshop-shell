@@ -36,3 +36,14 @@ nodejs () {
   systemctl enable $component &>>log_file
   systemctl restart $component &>>log_file
 }
+
+mongodb_schema_setup() {
+  echo -e "\e[32m Copy Mongodb repo file\e[0m"
+  cp /home/centos/roboshop-shell/Shell/mongodb.repo /etc/yum.repos.d/mongo.repo
+
+  echo -e "\e[32m Install MongoDB client\e[0m"
+  yum install mongodb-org-shell -y &>>/tmp/roboshop.log
+
+  echo -e "\e[32m Load Schema\e[0m"
+  mongo --host mongodb-dev.navien.cloud </app/schema/user.js
+}
