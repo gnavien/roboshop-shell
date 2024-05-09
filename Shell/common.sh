@@ -81,6 +81,18 @@ maven() {
   mv target/$component-1.0.jar $component.jar &>>${log_file}
   mysql_schema_setup
   systemd_setup
+}
 
+python() {
+  echo -e "${color} Install Pyton Dependencies ${nocolor}"
+  yum install python36 gcc python3-devel -y &>>/tmp/roboshop.log
+
+  app_presetup
+
+  echo -e "${color} Install Application Dependencies${nocolor}"
+  cd /app &>>/tmp/roboshop.log
+  pip3.6 install -r requirements.txt  &>>/tmp/roboshop.log
+
+  systemd_setup
 
 }
