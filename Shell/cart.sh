@@ -25,7 +25,7 @@ npm install &>>/tmp/roboshop.log
 echo -e "\e[32m Setup systemd services\e[0m"
 cp /home/centos/roboshop-shell/Shell/cart.service /etc/systemd/system/cart.service
 
-echo -e "\e[32m Start user service \e[0m"
+echo -e "\e[32m Start cart service \e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
 systemctl enable user &>>/tmp/roboshop.log
 systemctl restart user &>>/tmp/roboshop.log
