@@ -3,10 +3,22 @@ nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
 
+stat_check(){
+
+}
 app_presetup() {
 
    echo -e "${color} Add Application User${noclor}"
-   useradd roboshop &>>${log_file}
+   id roboshop &>>${log_file}
+   if [ $? -eq 1]; then
+      useradd roboshop &>>${log_file}
+   fi
+
+     if [ $? -eq 0]; then
+     echo Success
+     else
+     echo Failure
+     fi
 
    echo -e "${color} Creating application  Directory App${nocolor}"
    mkdir ${app_path}  &>>${log_file}
@@ -33,13 +45,26 @@ nodejs () {
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>log_file
 
   app_presetup
-
+       if [ $? -eq 0]; then
+       echo Success
+       else
+       echo Failure
+       fi
   echo -e "${color} Install Nodejs${noclor}"
   yum install nodejs -y &>>log_file
 
+       if [ $? -eq 0]; then
+       echo Success
+       else
+       echo Failure
+       fi
 
   systemd_setup
-
+   if [ $? -eq 0]; then
+   echo Success
+   else
+   echo Failure
+   fi
 
   echo -e "${color} Install Nodejs dependencies${noclor}"
   cd ${app_path}

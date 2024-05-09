@@ -1,23 +1,26 @@
-echo -e "\e[32mInstalling Nginx Server\e[0m"
-yum install nginx -y &>>/tmp/roboshop.log
+source common.sh
+component=frontend
 
-echo -e "\e[32mRemoving Old App Content\e[0m"
-rm -rf /usr/share/nginx/html/* &>>/tmp/roboshop.log
+echo -e "${color}Installing Nginx Server${nocolor}"
+yum install nginx -y &>>${log_file}
 
-echo -e "\e[32mDownloading frontend Content\e[0m"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>/tmp/roboshop.log
+echo -e "${color}Removing Old App Content${nocolor}"
+rm -rf /usr/share/nginx/html/* &>>${log_file}
 
-echo -e "\e[32mExtract Frontend content\e[0m"
+echo -e "${color}Downloading ${component} Content${nocolor}"
+curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log_file}
+
+echo -e "${color}Extract Frontend content${nocolor}"
 cd /usr/share/nginx/html
-unzip /tmp/frontend.zip &>>/tmp/roboshop.log
+unzip /tmp/${component}.zip &>>${log_file}
 
 #vim /etc/nginx/default.d/roboshop.conf we need to copy config file
-echo -e "\e[32m Update Frontend Configuration\e[0m"
+echo -e "${color} Update Frontend Configuration${nocolor}"
 cp /home/roboshop-shell/Shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
-echo -e "\e[32mStarting Nginx server\e[0m"
-systemctl enable nginx &>>/tmp/roboshop.log
-systemctl restart nginx &>>/tmp/roboshop.log
+echo -e "${color}Starting Nginx server${nocolor}"
+systemctl enable nginx &>>${log_file}
+systemctl restart nginx &>>${log_file}
 #
 
 
