@@ -1,32 +1,35 @@
-echo -e "\e[32m Configuring Nodejs repos\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
+source common.sh
+component=cart
 
-echo -e "\e[32m Install Nodejs\e[0m"
-yum install nodejs -y &>>/tmp/roboshop.log
+echo -e "${color}Configuring Nodejs repos${nocolor}"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
 
-echo -e "\e[32m Add Application User \e[0m"
-useradd roboshop &>>/tmp/roboshop.log
+echo -e "${color}Install Nodejs${nocolor}"
+yum install nodejs -y &>>${log_file}
 
-echo -e "\e[32m Create Application Directory \e[0m"
-rm -rf /app
-mkdir /app
+echo -e "${color}Add Application User ${nocolor}"
+useradd roboshop &>>${log_file}
 
-echo -e "\e[32m Download Application content \e[0m"
-curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip &>>/tmp/roboshop.log
-cd /app
+echo -e "${color}Create Application Directory ${nocolor}"
+rm -rf ${app_path}
+mkdir ${app_path}
 
-echo -e "\e[32m Extract application content\e[0m"
-unzip /tmp/cart.zip &>>/tmp/roboshop.log
+echo -e "${color}Download Application content ${nocolor}"
+curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log_file}
+cd ${app_path}
 
-echo -e "\e[32m Install Nodejs dependencies\e[0m"
-cd /app
-npm install &>>/tmp/roboshop.log
+echo -e "${color}Extract application content${nocolor}"
+unzip /tmp/${component}.zip &>>${log_file}
 
-echo -e "\e[32m Setup systemd services\e[0m"
-cp /home/centos/roboshop-shell/Shell/cart.service /etc/systemd/system/cart.service
+echo -e "${color}Install Nodejs dependencies${nocolor}"
+cd ${app_path}
+npm install &>>${log_file}
 
-echo -e "\e[32m Start cart service \e[0m"
-systemctl daemon-reload &>>/tmp/roboshop.log
-systemctl enable user &>>/tmp/roboshop.log
-systemctl restart user &>>/tmp/roboshop.log
+echo -e "${color}Setup systemd services${nocolor}"
+cp /home/centos/roboshop-shell/Shell/${component}.service /etc/systemd/system/${component}.service
+
+echo -e "${color}Start cart service ${nocolor}"
+systemctl daemon-reload &>>${log_file}
+systemctl enable ${component} &>>${log_file}
+systemctl restart ${component} &>>${log_file}
 

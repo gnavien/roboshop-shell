@@ -1,44 +1,46 @@
-component = catalogue
+source common.sh
+component=catalogue
 
-echo -e "\e[32m Configuring Nodejs repos\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/roboshop.log
 
-echo -e "\e[32m Install Nodejs\e[0m"
-yum install nodejs -y &>>/tmp/roboshop.log
+echo -e "${color} Configuring Nodejs repos ${noclor}"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>log_file
 
-echo -e "\e[32m Add Application User \e[0m"
-useradd roboshop &>>/tmp/roboshop.log
+echo -e "${color} Install Nodejs${noclor}"
+yum install nodejs -y &>>log_file
 
-echo -e "\e[32m Create Application Directory \e[0m"
-rm -rf /app
-mkdir /app
+echo -e "${color} Add Application User${noclor}"
+useradd roboshop &>>log_file
 
-echo -e "\e[32m Download Application content \e[0m"
-curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>/tmp/roboshop.log
-cd /app
+echo -e "${color} Create Application Directory ${noclor}"
+rm -rf ${app_path}
+mkdir ${app_path}
 
-echo -e "\e[32m Extract application content\e[0m"
-unzip /tmp/$component.zip &>>/tmp/roboshop.log
+echo -e "${color} Download Application content ${noclor}"
+curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>log_file
+cd ${app_path}
 
-echo -e "\e[32m Install Nodejs dependencies\e[0m"
-cd /app
-npm install &>>/tmp/roboshop.log
+echo -e "${color} Extract application content${noclor}"
+unzip /tmp/$component.zip &>>log_file
 
-echo -e "\e[32m Setup systemd services\e[0m"
+echo -e "${color} Install Nodejs dependencies${noclor}"
+cd ${app_path}
+npm install &>>log_file
+
+echo -e "${color} Setup systemd services${noclor}"
 cp /home/centos/roboshop-shell/Shell/$component.service /etc/systemd/system/$component.service
 
-echo -e "\e[32m Start Catalogue service \e[0m"
-systemctl daemon-reload &>>/tmp/roboshop.log
-systemctl enable $component &>>/tmp/roboshop.log
-systemctl restart $component &>>/tmp/roboshop.log
+echo -e "${color} Start Catalogue service ${noclor}"
+systemctl daemon-reload &>>log_file
+systemctl enable $component &>>log_file
+systemctl restart $component &>>log_file
 
-echo -e "\e[32m Copy Mongodb repo file\e[0m"
-cp /home/centos/roboshop-shell/Shell/mongodb.repo /etc/yum.repos.d/mongo.repo
+echo -e "${color} Copy Mongodb repo file ${noclor}"
+cp /home/centos/roboshop-shell/Shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>log_file
 
-echo -e "\e[32m Install MongoDB client\e[0m"
-yum install mongodb-org-shell -y &>>/tmp/roboshop.log
+echo -e "${color} Install MongoDB client ${noclor}"
+yum install mongodb-org-shell -y &>>log_file
 
-echo -e "\e[32m Load Schema\e[0m"
-mongo --host mongodb-dev.navien.cloud </app/schema/$component.js
+echo -e "${color} Load Schema ${noclor}"
+mongo --host mongodb-dev.navien.cloud </app/schema/$component.js &>>log_file
 
 
