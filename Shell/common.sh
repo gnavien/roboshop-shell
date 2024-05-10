@@ -8,7 +8,7 @@ if [ $user_id -ne 0 ]; then
   exit 1
 fi
 
-stat_check $?() {
+stat_check () {
   if [ $1 -eq 0 ]; then
     echo SUCCESS
   else
