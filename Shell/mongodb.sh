@@ -2,7 +2,7 @@
 source common.sh
 
 echo -e "${color}Copy mogo DB Repo file${nocolor}"
-cp /home/roboshop-shell/Shell/mongdb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
+cp /home/centos/roboshop-shell/Shell/mongdb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
 stat_check $?
 
 echo -e "${color}Installing MogoDB Server${nocolor}"
