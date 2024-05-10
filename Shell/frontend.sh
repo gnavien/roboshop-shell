@@ -18,7 +18,7 @@ stat_check $?
 
 #vim /etc/nginx/default.d/roboshop.conf we need to copy config file
 echo -e "${color} Update Frontend Configuration${nocolor}"
-cp /home/roboshop-shell/Shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp /home/centos/roboshop-shell/Shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 stat_check $?
 
 echo -e "${color}Starting Nginx server${nocolor}"
