@@ -15,7 +15,8 @@ yum install redis -y &>>${log_file}
 stat_check $?
 
 echo -e "${color} Update Listen address${nocolor}"
-sed -i '/127.0.0.1/0.0.0.0/' /etc/redis.conf
+#sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf
 stat_check $?
 
 echo -e "${color} Start Redis Service${nocolor}"
