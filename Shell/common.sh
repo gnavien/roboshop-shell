@@ -26,6 +26,7 @@ app_presetup() {
   stat_check $?
 
    echo -e "${color} Creating application  Directory App${nocolor}"
+   rm -rf ${app_path} &>>${log_file}
    mkdir ${app_path}  &>>${log_file}
    stat_check $?
 
