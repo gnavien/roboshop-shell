@@ -87,7 +87,7 @@ mongodb_schema_setup() {
   stat_check $?
 
   echo -e "${color} Load Schema${nocolor}"
-  mongo --host mongodb-dev.navien.cloud </app/schema/$component.js
+  mongo --host mongodb-dev.navien.cloud </app/schema/$component.js &>>{log_file}
   stat_check $?
 }
 
