@@ -1,4 +1,4 @@
-source=common.sh
+source common.sh
 
 echo -e "${color}mDisable Mysql Installed version${nocolor}"
 yum  module disable mysql -y &>>${log_file}

@@ -1,4 +1,4 @@
-source=common.sh
+source common.sh
 
 echo -e "${color} Configure Erlang Repos${nocolor}"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>${log_file}

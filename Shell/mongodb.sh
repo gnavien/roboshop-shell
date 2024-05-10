@@ -1,5 +1,5 @@
 #vim /etc/yum.repos.d/mongo.repo
-source=common.sh
+source common.sh
 
 echo -e "${color}Copy mogo DB Repo file${nocolor}"
 cp /home/roboshop-shell/Shell/mongdb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
