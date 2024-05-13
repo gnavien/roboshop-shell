@@ -1,4 +1,4 @@
-color="\e32m"
+color="\e36m"
 nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
@@ -67,48 +67,48 @@ nodejs () {
 
   systemd_setup
 
-  echo -e "${color} Install Nodejs dependencies${noclor}"
+  echo -e "${color} Install Nodejs dependencies  ${noclor}"
   cd ${app_path}
   npm install &>>log_file
 
-  echo -e "${color} Setup systemd services${noclor}"
+  echo -e "${color} Setup systemd services ${noclor}"
   cp /home/centos/roboshop-shell/Shell/$component.service /etc/systemd/system/$component.service
   stat_check $?
 
 }
 
 mongodb_schema_setup() {
-  echo -e "${color} Copy Mongodb repo file${nocolor}"
+  echo -e "${color} Copy Mongodb repo file ${nocolor}"
   cp /home/centos/roboshop-shell/Shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
   stat_check $?
 
-  echo -e "${color} Install MongoDB client${nocolor}"
+  echo -e "${color} Install MongoDB client ${nocolor}"
   yum install mongodb-org-shell -y &>>{log_file}
   stat_check $?
 
-  echo -e "${color} Load Schema${nocolor}"
+  echo -e "${color} Load Schema ${nocolor}"
   mongo --host mongodb-dev.navien.cloud </app/schema/$component.js &>>{log_file}
   stat_check $?
 }
 
 mysql_schema_setup() {
-  echo -e "${color} Install MySql${nocolor}"
+  echo -e "${color} Install MySql ${nocolor}"
   yum install mysql -y  &>>${log_file}
   stat_check $?
 
-  echo -e "${color} Load Schema${nocolor}"
+  echo -e "${color} Load Schema ${nocolor}"
   mysql -h mysql-dev.navien.cloud -uroot -pRoboShop@1 < /app/schema/$component.sql  &>>${log_file}
   stat_check $?
 }
 
 maven() {
 
-  echo -e "${color} Install Maven${nocolor}"
+  echo -e "${color} Install Maven ${nocolor}"
   yum install maven -y &>>${log_file}
   stat_check $?
 
   app_presetup
-  echo -e "${color} Download Maven Dependencies${nocolor}"
+  echo -e "${color} Download Maven Dependencies ${nocolor}"
   mvn clean package &>>${log_file}
   mv target/$component-1.0.jar $component.jar &>>${log_file}
   stat_check $?
