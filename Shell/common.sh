@@ -25,7 +25,7 @@ app_presetup() {
    fi
   stat_check $?
 
-   echo -e "${color} Creating application  Directory App${nocolor}"
+   echo -e "${color} Creating application  Directory App ${nocolor}"
    rm -rf ${app_path} &>>${log_file}
    mkdir ${app_path}  &>>${log_file}
    stat_check $?
@@ -34,7 +34,7 @@ app_presetup() {
    curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>{log_file}
    stat_check $?
 
-   echo -e "${color} Extract application content${noclor}"
+   echo -e "${color} Extract application content ${noclor}"
    cd ${app_path}
    unzip /tmp/$component.zip &>>log_file
    stat_check $?
@@ -62,7 +62,7 @@ nodejs () {
   stat_check $? $
   app_presetup
 
-  echo -e "${color} Install Nodejs${noclor}"
+  echo -e "${color} Install Nodejs ${noclor}"
   yum install nodejs -y &>>log_file
 
   systemd_setup
@@ -124,7 +124,7 @@ python() {
 
   app_presetup
 
-  echo -e "${color} Install Application Dependencies${nocolor}"
+  echo -e "${color} Install Application Dependencies  ${nocolor}"
   cd /app &>>${log_file}
   pip3.6 install -r requirements.txt  &>>${log_file}
   stat_check $?
