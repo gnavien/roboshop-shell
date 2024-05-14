@@ -1,23 +1,18 @@
-#vim /etc/yum.repos.d/mongo.repo
 source common.sh
 
-echo -e "${color} Copy mogo DB Repo file ${nocolor}"
-cp /home/centos/roboshop-shell/Shell/mongdb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
+echo -e " ${color} Copy MongoDB Repo file  ${nocolor} "
+cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo   &>>/tmp/roboshop.log
 stat_check $?
 
-echo -e "${color}Installing MogoDB Server${nocolor}"
-yum install mongodb-org -y &>>${log_file}
+echo -e " ${color} Installing MongoDB Server ${nocolor} "
+yum install mongodb-org -y  &>>/tmp/roboshop.log
 stat_check $?
 
-echo -e "${color}Replacing listen address${nocolor}"
-
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+echo -e " ${color} Update MongoDB Listen Address ${nocolor} "
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 stat_check $?
 
-echo -e "${color}Installing MogoDB Server${nocolor}"
-systemctl enable mongod &>>${log_file}
-systemctl restart mongod &>>${log_file}
+echo -e " ${color} Start MongoDB Service ${nocolor} "
+systemctl enable mongod  &>>/tmp/roboshop.log
+systemctl restart mongod  &>>/tmp/roboshop.log
 stat_check $?
-#vim /etc/mongod.conf (Update listen address from 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf)
-
-

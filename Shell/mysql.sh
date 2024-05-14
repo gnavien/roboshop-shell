@@ -1,25 +1,22 @@
 source common.sh
 
-echo -e "${color}mDisable Mysql Installed version${nocolor}"
-yum  module disable mysql -y &>>${log_file}
-stat_check
+echo -e " ${color}  Disable MySQL Default Version  ${nocolor} "
+yum module disable mysql -y &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "${color}m Copy MySql repo file ${nocolor}"
-cp  /home/centos/roboshop-shell/Shell/mysql.repo /etc/yum.repos.d/mysql.repo &>>${log_file}
-stat_check
+echo -e " ${color}  Copy MySQL repo file  ${nocolor} "
+cp /home/centos/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo  &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "${color}m Install Mysql Community Server${nocolor}"
-yum install mysql-community-server -y &>>${log_file}
-stat_check
+echo -e " ${color}  Install MySQL Community Server  ${nocolor} "
+yum install mysql-community-server -y &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "${color}m Start Mysql Service${nocolor}"
-systemctl enable mysqld
-systemctl restart mysqld
-stat_check
+echo -e " ${color}  Start MySQL Service  ${nocolor} "
+systemctl enable mysqld &>>/tmp/roboshop.log
+systemctl restart mysqld &>>/tmp/roboshop.log
+stat_check $?
 
-echo -e "${color}m Setup Mysql Password${nocolor}"
-mysql_secure_installation --set-root-pass RoboShop@1 &>>${log_file}
-stat_check
-#echo -e "${color}m${nocolor}"
-#mysql -uroot -pRoboShop@1 &>>${log_file}
-# netstat -lntp to check the database port is working
+echo -e " ${color}  Setup MySQL Password  ${nocolor} "
+mysql_secure_installation --set-root-pass $1 &>>/tmp/roboshop.log
+stat_check $?
