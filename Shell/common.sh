@@ -8,8 +8,19 @@ if [ $user_id -ne 0 ]; then
   exit 1
 fi
 
+#stat check function
+
+#echo $0 is the script name
+#echo $1 is the first argument
+#echo $2 is the second argument
+#
+# $? is the exit status of the last command
+# If the exit status is 0, then the command was successful
+# If the exit status is 1, then the command failed
+# If the exit status is not 0, then the script exits with that exit status
+
 stat_check() {
-  if [ $1 -eq 0 ]; then
+  if [ $1 -eq 0 ]; then                       # to check if the output received is equal to 0
     echo SUCCESS
   else
     echo FAILURE
@@ -19,8 +30,8 @@ stat_check() {
 
 app_presetup() {
   echo -e "${color} Add Application User${nocolor}"
-  id roboshop &>>$log_file
-  if [ $? -eq 1 ]; then
+  id roboshop &>>$log_file                     # A ID will be getting when we issue the command
+  if [ $? -eq 1 ]; then                        # if it is equal to 0 and then  the user is not there yet.
     useradd roboshop  &>>$log_file
   fi
   stat_check $?
