@@ -2,7 +2,7 @@ color="\e[35m"
 nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
-user_id=$(id -u)
+user_id=$(id -u)              # If the user is not running with zero id -u
 if [ $user_id -ne 0 ]; then
   echo Script should be running with sudo
   exit 1
@@ -13,18 +13,19 @@ fi
 #echo $0 is the script name
 #echo $1 is the first argument
 #echo $2 is the second argument
+#echo All arguments - $*
+#echo No of arguments - $#
+
 #
 # $? is the exit status of the last command
-# If the exit status is 0, then the command was successful
-# If the exit status is 1, then the command failed
-# If the exit status is not 0, then the script exits with that exit status
+
 
 stat_check() {
   if [ $1 -eq 0 ]; then                       # to check if the output received is equal to 0
     echo SUCCESS
   else
     echo FAILURE
-    exit 1
+    exit 1                                # If there is a failure then exit with a nonzero exit status
   fi
 }
 
