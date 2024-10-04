@@ -9,6 +9,10 @@
     <mapping directory="$PROJECT_DIR$/roboshop-ansible" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop-terraform" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tf-module-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tf-module-documentdb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tf-module-elasticache" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tf-module-rabbitmq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tf-module-rds" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tf-module-vpc" vcs="Git" />
   </component>
 </project>
