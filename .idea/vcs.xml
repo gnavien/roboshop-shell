@@ -8,6 +8,7 @@
     <mapping directory="$PROJECT_DIR$/learn-terraform" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop-ansible" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop-terraform" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tf-module-alb" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tf-module-app" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tf-module-documentdb" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tf-module-elasticache" vcs="Git" />
