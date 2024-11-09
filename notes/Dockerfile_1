@@ -1,0 +1,23 @@
+# Use the latest Ubuntu image
+FROM ubuntu:latest
+
+# Add metadata to the image
+LABEL name="navien"
+
+# Set environment variables
+ENV AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXXXXX \
+    AWS_SECRET_KEY_ID=XXXXXXXXXXXXXXXXXXXXXXXX \
+    AWS_DEFAULT_REGION=US-EAST-1A
+
+# Define build arguments
+ARG T_VERSION='1.6.6'
+ARG P_VERSION='1.8.0'
+
+# Update package list and install necessary packages
+RUN apt-get update && apt-get install -y jq net-tools curl wget unzip nginx iputils-ping
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

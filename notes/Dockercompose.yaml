@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: dev_container
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: prod_container
+
+  staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.staging
+    container_name: staging_container
