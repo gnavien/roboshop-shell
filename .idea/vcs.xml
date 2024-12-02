@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/ansible/learn-ansible" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/aws-parameter-store" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/learn-ansible" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/learn-jenkins" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/learn-terraform" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop-ansible" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop-terraform" vcs="Git" />
